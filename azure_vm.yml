@@ -1,0 +1,81 @@
+# Ansible
+
+---
+- name: Simple Azure VM (full network setup)
+  hosts: localhost
+  connection: local
+
+  tasks:
+
+    - name: Create Resource Group
+      azure_rm_resourcegroup:
+        name: myResourceGroup
+        location: westeurope
+
+    - name: Create Virtual Network
+      azure_rm_virtualnetwork:
+        resource_group: myResourceGroup
+        name: myVnet
+        address_prefixes:
+          - "10.0.0.0/16"
+
+    - name: Create Subnet
+      azure_rm_subnet:
+        resource_group: myResourceGroup
+        name: mySubnet
+        virtual_network: myVnet
+        address_prefix: "10.0.1.0/24"
+
+    - name: Create Public IP
+      azure_rm_publicipaddress:
+        resource_group: myResourceGroup
+        name: myPublicIP
+        allocation_method: Static
+      register: public_ip
+
+    - name: Show Public IP
+      debug:
+        msg: "Public IP: {{ public_ip.state.ip_address }}"
+
+    - name: Create Network Security Group (allow SSH)
+      azure_rm_securitygroup:
+        resource_group: myResourceGroup
+        name: myNSG
+        rules:
+          - name: SSH
+            protocol: Tcp
+            destination_port_range: 22
+            access: Allow
+            priority: 100
+            direction: Inbound
+            source_address_prefix: "*"
+
+    - name: Create Network Interface
+      azure_rm_networkinterface:
+        resource_group: myResourceGroup
+        name: myNIC
+        virtual_network: myVnet
+        subnet: mySubnet
+        public_ip_name: myPublicIP
+        security_group: myNSG
+
+    - name: Create VM
+      azure_rm_virtualmachine:
+        resource_group: myResourceGroup
+        name: myVM
+        vm_size: Standard_B1s
+        admin_username: azureuser
+        ssh_password_enabled: false
+
+        ssh_public_keys:
+          - path: /home/azureuser/.ssh/authorized_keys
+            key_data: "INSERISCI_LA_TUA_CHIAVE_SSH"
+
+        network_interfaces:
+          - myNIC
+
+        image:
+          publisher: Canonical
+          offer: UbuntuServer
+          sku: "22_04-lts"
+          version: latest
