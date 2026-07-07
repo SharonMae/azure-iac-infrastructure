@@ -2,7 +2,7 @@
 
 Azure IaC Infrastructure  è un progetto dedicato all'implementazione di infrastrutture cloud su Microsoft Azure mediante il paradigma  Infrastructure as Code (IaC).
 
-L'obiettivo del repository è automatizzare il provisioning delle risorse Azure utilizzando Terraform e Ansible, garantendo configurazioni ripetibili, versionabili e facilmente manutenibili.
+L'obiettivo del repository è automatizzare il provisioning delle risorse Azure, garantendo configurazioni ripetibili, versionabili e facilmente manutenibili.
 
 Il progetto rappresenta una base per la gestione dell'infrastruttura cloud secondo le best practice DevOps, favorendo automazione, scalabilità e controllo delle modifiche attraverso Git.
 
