@@ -93,19 +93,21 @@ Il file `azure_vm.bicep` definisce NSG, VNet, Subnet, IP pubblico, NIC e VM Linu
 
 ```bash
 # Creare (se non esiste già) il resource group di destinazione
-az group create --name myResourceGroup --location westeurope
+az group create \
+  --name myResourceGroup \
+  --location westeurope
 
-# Validare il template
+# Validare il template Bicep
 az deployment group validate \
-- --resource-group myResourceGroup \
-- --template-file azure_vm.bicep \
-- --parameters adminPassword=<password-sicura>
+  --resource-group myResourceGroup \
+  --template-file azure_vm.bicep \
+  --parameters adminPassword='<password-sicura>'
 
 # Distribuire l'infrastruttura
 az deployment group create \
-- --resource-group myResourceGroup \
-- --template-file azure_vm.bicep \
-- --parameters adminPassword=<password-sicura>
+  --resource-group myResourceGroup \
+  --template-file azure_vm.bicep \
+  --parameters adminPassword='<password-sicura>'
 ```
 
 Parametri principali esposti dal template:
