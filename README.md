@@ -162,7 +162,7 @@ Il repository potrà essere ampliato con:
 - Approccio orientato alla scalabilità
 
 ---
-
+ 
 ## Note
 
 Progetto realizzato a scopo di studio, sperimentazione e consolidamento delle competenze in ambito Cloud Computing, Microsoft Azure, Terraform, Bicep e DevOps.
