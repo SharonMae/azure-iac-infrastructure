@@ -39,7 +39,7 @@ Git & GitHub
 azure-iac-infrastructure/
 │
 ├── azure_vm.tf # Configurazione Terraform della Virtual Machine
-├── azure_vm.bicep- # Configurazione Bicep (ARM) della Virtual Machine
+├── azure_vm.bicep # Configurazione Bicep (ARM) della Virtual Machine
 ├── azure_vm.yml# Playbook Ansible per il provisioning della Virtual Machine
 ├── README.md# Documentazione del progetto
 └── .gitignore
